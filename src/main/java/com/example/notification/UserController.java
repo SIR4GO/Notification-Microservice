@@ -21,11 +21,12 @@ public class UserController {
     }
 
     @RequestMapping(value = "/fire" , method = RequestMethod.GET)
-    public String sendMessage(@RequestParam("message") String message , @RequestParam("SSID") String SSID , Principal principal)
+    public String sendMessage(@RequestParam("message") String message , @RequestParam("SSID") String SSID)
     {
-        //System.out.println(principal.getName());
-        //String sessionId = readFromFile();
-        messagingTemplate.convertAndSend("/queue/reply-"+SSID, message);
+//        System.out.println(principal.getName());
+//        messagingTemplate.convertAndSend("/queue/reply-"+SSID, message);
+
+        messagingTemplate.convertAndSendToUser(SSID,"/queue/notify",message);
 
         return "Message had sent";
     }

@@ -395,24 +395,25 @@
                 // console.log("connected, session id: " + sessionId);
 
 
-                // for send on specific session
-                var accessToken;
-                stompClient.subscribe('/connection/join-'+sessionId, function (msg) {
-
-                     accessToken = msg.body; // user cardinality
-                    // set access token for each client
-                    stompClient.subscribe('/queue/reply-'+ accessToken, function (msg) {
-                          console.log(msg);
-
-                    });
-
-
-                });
+                // // for send on specific session
+                // var accessToken;
+                // stompClient.subscribe('/connection/join-'+sessionId, function (msg) {
+                //
+                //      accessToken = msg.body; // user cardinality
+                //     // set access token for each client
+                //     stompClient.subscribe('/queue/reply-'+ accessToken, function (msg) {
+                //           console.log(msg);
+                //
+                //     });
+                //
+                //
+                // });
+                // stompClient.send("/app/connection", {}, JSON.stringify(joinMessage));
 
 
 
                 // for broadcasting on role
-                stompClient.subscribe('/queue/role', function (msg) {
+                stompClient.subscribe('/user/queue/notify', function (msg) {
                     console.log(msg);
 
                 });
@@ -424,7 +425,7 @@
                 };
 
                 // send only one
-                stompClient.send("/app/connection", {}, JSON.stringify(joinMessage));
+                //stompClient.send("/app/chat1", {}, JSON.stringify(joinMessage));
 
                 // send for any thing on chat message mapping function
                // stompClient.send("/app/chat1", {}, JSON.stringify(joinMessage));

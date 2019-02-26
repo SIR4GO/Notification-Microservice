@@ -52,20 +52,22 @@ public class ChatController {
 		//headerAccessor.getSessionAttributes().put(chatMessage.getSender() , headerAccessor.getSessionId() );
 		//  writeToFile(sessionId);
 		//  messagingTemplate.convertAndSend("/queue/reply-"+sessionId, "test");
-//		messagingTemplate.convertAndSendToUser(sessionId,"/queue/reply","testads");
+		System.out.println(principal.getName()); // get  userName
+
+  		messagingTemplate.convertAndSendToUser(principal.getName(),"/queue/role","testads");
 
 		//return chatMessage;
 
 
-		//System.out.println(principal.getName()); // get  userName
 
 	}
 
 	@CrossOrigin(origins = "*")
-	@MessageMapping("/connection") // for send  => /app/chat
+	@MessageMapping("/connection")
 	public void connection(@Payload ChatMessage chatMessage, @Header("simpSessionId") String sessionId  , Principal principal) {
 
-		System.out.println(sessionId);
+		//System.out.println(principal.getName());
+//		System.out.println(sessionId);
  		messagingTemplate.convertAndSend("/connection/join-"+sessionId, principal.getName() );
 
 	}
