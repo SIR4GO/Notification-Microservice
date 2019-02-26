@@ -1,4 +1,4 @@
-package com.example.notification.config;
+package com.example.notification.configs;
 
 import org.keycloak.adapters.springboot.KeycloakSpringBootConfigResolver;
 import org.keycloak.adapters.springsecurity.KeycloakSecurityComponents;

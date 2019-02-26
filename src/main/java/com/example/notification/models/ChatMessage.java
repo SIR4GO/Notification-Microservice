@@ -1,4 +1,4 @@
-package com.example.notification;
+package com.example.notification.models;
 
 public class ChatMessage {
 	private String content;

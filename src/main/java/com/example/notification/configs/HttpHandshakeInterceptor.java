@@ -1,4 +1,4 @@
-package com.example.notification.config;
+package com.example.notification.configs;
 
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
@@ -17,7 +17,6 @@ public class HttpHandshakeInterceptor implements HandshakeInterceptor {
         if (request instanceof ServletServerHttpRequest) {
             ServletServerHttpRequest servletRequest = (ServletServerHttpRequest) request;
             HttpSession session = servletRequest.getServletRequest().getSession();
-            System.out.println("executed");
            // HttpHandshakeInterceptor.writeToFile(session.getId());
             attributes.put("sessionId", session.getId());
         }

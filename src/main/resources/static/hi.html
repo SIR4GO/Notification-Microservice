@@ -418,6 +418,10 @@
 
                 });
 
+                stompClient.subscribe('/queue/broadcast', function (msg) {
+                    console.log(msg);
+                });
+
                 var joinMessage = {
                     sender: username,
                     content: 'join message  ',
@@ -425,7 +429,7 @@
                 };
 
                 // send only one
-                //stompClient.send("/app/chat1", {}, JSON.stringify(joinMessage));
+                stompClient.send("/app/join", {}, JSON.stringify(joinMessage));
 
                 // send for any thing on chat message mapping function
                // stompClient.send("/app/chat1", {}, JSON.stringify(joinMessage));

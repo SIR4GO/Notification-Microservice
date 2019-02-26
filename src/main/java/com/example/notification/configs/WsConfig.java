@@ -1,4 +1,4 @@
-package com.example.notification.config;
+package com.example.notification.configs;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.converter.MessageConverter;
@@ -31,35 +31,8 @@ public class WsConfig implements WebSocketMessageBrokerConfigurer {
 		registry.setApplicationDestinationPrefixes("/app");
 	}
 
-	@Override
-	public void configureWebSocketTransport(WebSocketTransportRegistration webSocketTransportRegistration) {
 
-	}
 
-	@Override
-	public void configureClientInboundChannel(ChannelRegistration channelRegistration) {
-
-	}
-
-	@Override
-	public void configureClientOutboundChannel(ChannelRegistration channelRegistration) {
-
-	}
-
-	@Override
-	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> list) {
-
-	}
-
-	@Override
-	public void addReturnValueHandlers(List<HandlerMethodReturnValueHandler> list) {
-
-	}
-
-	@Override
-	public boolean configureMessageConverters(List<MessageConverter> list) {
-		return false;
-	}
 
 
 }
