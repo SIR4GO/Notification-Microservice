@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="layout :: headerFragment">
+</head>
+<body>
+	<div class="container">
+		<div class="jumbotron text-center">
+			<h1>Home</h1>
+		</div>
+		<div>
+			<p>
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam
+				erat lectus, vehicula feugiat ultricies at, tempus sed ante. Cras
+				vehicula libero. Aenean a neque sit amet tellus porttitor rutrum nec
+				at leo.
+			</p>
+
+
+			<div class="well">
+				<b>Enter: </b><a th:href="@{/customers}">Profile</a>
+			</div>
+		</div>
+
+	</div>
+	<!-- container -->
+
+</body>
+</html>
