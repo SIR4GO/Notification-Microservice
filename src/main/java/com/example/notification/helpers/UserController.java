@@ -1,4 +1,4 @@
-package com.example.notification;
+package com.example.notification.helpers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +19,7 @@ public class UserController {
         return "Hello " + principal.getName()+"<br><br> "+"<a href='/index2.html'>Chat room </a> "+"<br><br> " + "<a href='/logout'>Logout</a>";
 
     }
+
 
 
 

@@ -1,5 +1,7 @@
 package com.example.notification.models;
 
+
+
 public class ChatMessage {
 	private String content;
 	private String sender;

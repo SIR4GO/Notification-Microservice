@@ -414,13 +414,16 @@
 
                 // for broadcasting on role
                 stompClient.subscribe('/user/queue/notify', function (msg) {
-                    console.log(msg);
+
+
+                    stompClient.send("/app/ack", {}, msg.body);
 
                 });
 
-                stompClient.subscribe('/queue/broadcast', function (msg) {
-                    console.log(msg);
-                });
+                // stompClient.subscribe('/queue/broadcast', function (msg) {
+                //       console.log(msg);
+                // });
+
 
                 var joinMessage = {
                     sender: username,
