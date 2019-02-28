@@ -415,7 +415,7 @@
                 // for broadcasting on role
                 stompClient.subscribe('/user/queue/notify', function (msg) {
 
-
+                    console.log(JSON.parse(msg.body));
                     stompClient.send("/app/ack", {}, msg.body);
 
                 });
