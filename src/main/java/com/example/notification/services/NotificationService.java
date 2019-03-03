@@ -5,9 +5,12 @@ import com.example.notification.Repositories.NotificationRepo;
 import com.example.notification.models.Notification;
 import com.example.notification.models.NotificationStructure;
 import com.example.notification.models.Receiver;
+import com.example.notification.specifications.NotificationSpec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class NotificationService {
@@ -49,6 +52,10 @@ public class NotificationService {
     }
 
 
+    public List<Notification> getByContentAndState(String content , String state)
+    {
+     //   return notificationRepo.findAllByMessageAndSendingState(message , state);
 
-
+      return notificationRepo.findAll(NotificationSpec.getNotificationByContentAndState(content ,state));
+    }
 }

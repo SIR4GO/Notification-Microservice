@@ -1,6 +1,7 @@
 package com.example.notification.controllers;
 
 
+import com.example.notification.Repositories.NotificationCriteria;
 import com.example.notification.helpers.NotificationValidation;
 import com.example.notification.helpers.ResponseMessage;
 import com.example.notification.models.ChatMessage;
@@ -14,6 +15,7 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
+import java.util.List;
 
 
 @RestController
@@ -25,6 +27,9 @@ public class NotificationController {
 
     @Autowired
     private NotificationService notificationService;
+
+    @Autowired
+    private NotificationCriteria notificationCriteria;
 
 
     @CrossOrigin(origins = "*")   //Substitute with system domain
@@ -44,6 +49,17 @@ public class NotificationController {
         //  acknowledge would be  Received if notification had sent successfully to user
         notificationService.updateNotificationState(notification);
     }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping(value = "/getNotifications/{content}/{state}")
+    public List<Notification> getNotifications(@PathVariable String content, @PathVariable String state) {
+
+        // notificationCriteria.getNotificationByContent(content , state);
+        return notificationService.getByContentAndState(content,state);
+    }
+
+
+
 
 
     @CrossOrigin(origins = "*")
@@ -71,6 +87,8 @@ public class NotificationController {
         messagingTemplate.convertAndSend("/queue/broadcast", message);
         return "Message had sent To All";
     }
+
+
 
 
 }
