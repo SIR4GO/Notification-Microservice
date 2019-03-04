@@ -9,13 +9,13 @@ import com.example.notification.models.Notification;
 import com.example.notification.models.NotificationStructure;
 import com.example.notification.services.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
-import java.util.List;
 
 
 @RestController
@@ -28,8 +28,6 @@ public class NotificationController {
     @Autowired
     private NotificationService notificationService;
 
-    @Autowired
-    private NotificationCriteria notificationCriteria;
 
 
     @CrossOrigin(origins = "*")   //Substitute with system domain
@@ -52,10 +50,10 @@ public class NotificationController {
 
     @CrossOrigin(origins = "*")
     @GetMapping(value = "/getNotifications/{content}/{state}")
-    public List<Notification> getNotifications(@PathVariable String content, @PathVariable String state) {
+    public Page<Notification> getNotifications(@PathVariable String content, @PathVariable String state , @RequestParam Integer page , @RequestParam Integer pageSize , @RequestParam String sortingAttrib ) {
 
         // notificationCriteria.getNotificationByContent(content , state);
-        return notificationService.getByContentAndState(content,state);
+        return notificationService.getByContentAndState(content ,state , page , pageSize ,sortingAttrib);
     }
 
 

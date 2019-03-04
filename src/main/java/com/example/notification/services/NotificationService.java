@@ -7,10 +7,11 @@ import com.example.notification.models.NotificationStructure;
 import com.example.notification.models.Receiver;
 import com.example.notification.specifications.NotificationSpec;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class NotificationService {
@@ -52,10 +53,14 @@ public class NotificationService {
     }
 
 
-    public List<Notification> getByContentAndState(String content , String state)
+    public Page<Notification> getByContentAndState(String content , String state , Integer page , Integer pageSize , String sortingAttrib )
     {
-     //   return notificationRepo.findAllByMessageAndSendingState(message , state);
 
-      return notificationRepo.findAll(NotificationSpec.getNotificationByContentAndState(content ,state));
+        // return notificationRepo.findAllByMessageAndSendingState(message , state);
+        //return notificationRepo.finaAllBySomeCriteria(NotificationSpec.getNotificationByContentAndState(content ,state) ,(Pageable) pageRequest) ;
+
+
+        return notificationRepo.findAll(NotificationSpec.getNotificationByContentAndState(content ,state) ,PageRequest.of(page,pageSize,Sort.Direction.ASC,sortingAttrib));
+
     }
 }

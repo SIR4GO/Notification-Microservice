@@ -29,4 +29,25 @@ public class NotificationSpec {
 
   }
 
+    public static Specification<Notification> getNotificationByContentAndStateFromDateAndTime(String content , String state , String from)
+    {
+        return new Specification<Notification>() {
+            @Override
+            public Predicate toPredicate(Root<Notification> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+
+                Predicate contentCondition = criteriaBuilder.equal(root.get("message") , content);
+                Predicate stateCondition = criteriaBuilder.equal(root.get("sendingState") , state);
+                Predicate dateCondition = criteriaBuilder.greaterThan(root.get("createDateTime") , from);
+
+                Predicate contentAndStateAndDateTimeCondition = criteriaBuilder.and(contentCondition ,stateCondition,dateCondition);
+
+                return contentAndStateAndDateTimeCondition;
+            }
+        };
+
+    }
+
+
+
+
 }
