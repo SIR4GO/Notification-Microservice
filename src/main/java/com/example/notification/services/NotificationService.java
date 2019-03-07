@@ -55,12 +55,25 @@ public class NotificationService {
 
     public Page<Notification> getByContentAndState(String content , String state , Integer page , Integer pageSize , String sortingAttrib )
     {
-
-        // return notificationRepo.findAllByMessageAndSendingState(message , state);
-        //return notificationRepo.finaAllBySomeCriteria(NotificationSpec.getNotificationByContentAndState(content ,state) ,(Pageable) pageRequest) ;
-
-
+        //System.out.println("default case");
         return notificationRepo.findAll(NotificationSpec.getNotificationByContentAndState(content ,state) ,PageRequest.of(page,pageSize,Sort.Direction.ASC,sortingAttrib));
+    }
 
+    public Page<Notification> getByContentAndStateFromDateAndTime(String content ,String state ,Integer page ,Integer pageSize ,String sortingAttrib , String from)
+    {
+       // System.out.println("case 1");
+        return notificationRepo.findAll(NotificationSpec.getNotificationByContentAndStateFromDateAndTime(content , state , from),PageRequest.of(page,pageSize,Sort.Direction.ASC,sortingAttrib));
+    }
+
+    public Page<Notification> getByContentAndStateToDateAndTime(String content ,String state ,Integer page ,Integer pageSize ,String sortingAttrib , String toDate)
+    {
+        //System.out.println("case 2");
+        return notificationRepo.findAll(NotificationSpec.getNotificationByContentAndStateToDateAndTime(content , state , toDate),PageRequest.of(page,pageSize,Sort.Direction.ASC,sortingAttrib));
+    }
+
+    public Page<Notification> getByContentAndStateFromAndToDateAndTime(String content ,String state ,Integer page ,Integer pageSize ,String sortingAttrib , String fromDate,String toDate)
+    {
+       // System.out.println("case 3");
+        return notificationRepo.findAll(NotificationSpec.getNotificationByContentAndStateFromAndToDateAndTime(content , state ,fromDate , toDate ),PageRequest.of(page,pageSize,Sort.Direction.ASC,sortingAttrib));
     }
 }

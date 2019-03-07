@@ -1,7 +1,6 @@
 package com.example.notification.controllers;
 
 
-import com.example.notification.Repositories.NotificationCriteria;
 import com.example.notification.helpers.NotificationValidation;
 import com.example.notification.helpers.ResponseMessage;
 import com.example.notification.models.ChatMessage;
@@ -15,9 +14,11 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.web.bind.annotation.*;
+import javax.validation.constraints.NotNull;
 import java.security.Principal;
 
 
+@SuppressWarnings("ALL")
 @RestController
 public class NotificationController {
 
@@ -50,10 +51,29 @@ public class NotificationController {
 
     @CrossOrigin(origins = "*")
     @GetMapping(value = "/getNotifications/{content}/{state}")
-    public Page<Notification> getNotifications(@PathVariable String content, @PathVariable String state , @RequestParam Integer page , @RequestParam Integer pageSize , @RequestParam String sortingAttrib ) {
+    public Page<Notification> getNotifications(@PathVariable() String content,
+                                               @PathVariable()  String state ,
+                                               @RequestParam @NotNull  Integer page ,
+                                               @RequestParam @NotNull  Integer pageSize ,
+                                               @RequestParam @NotNull  String sortingAttrib,
+                                               @RequestParam(defaultValue = "", required = false) String from,
+                                               @RequestParam(defaultValue = "", required = false) String to,
+                                               Principal principal) {
 
-        // notificationCriteria.getNotificationByContent(content , state);
+
+        //user name
+        System.out.println(principal.getName());
+
+        if(!from.isEmpty() && to.isEmpty())
+            return notificationService.getByContentAndStateFromDateAndTime(content , state , page , pageSize ,sortingAttrib,from);
+        else if(from.isEmpty() && !to.isEmpty())
+            return notificationService.getByContentAndStateToDateAndTime(content ,state , page , pageSize ,sortingAttrib,to);
+        else if(!from.isEmpty() && !to.isEmpty())
+            return notificationService.getByContentAndStateFromAndToDateAndTime(content ,state , page , pageSize ,sortingAttrib,from,to);
+
+
         return notificationService.getByContentAndState(content ,state , page , pageSize ,sortingAttrib);
+
     }
 
 
